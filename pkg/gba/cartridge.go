@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-type CartridgeHeader struct {
+type cartridgeHeader struct {
 	/*
 		Space for a single 32bit ARM opcode that redirects to the actual startaddress of the cartridge,
 		this should be usually a "B <start>" instruction.
@@ -99,8 +99,8 @@ func readROMFile(romPath string) []byte {
 	return romBytes
 }
 
-func extractHeaderData(romData []byte) *CartridgeHeader {
-	header := new(CartridgeHeader)
+func extractHeaderData(romData []byte) *cartridgeHeader {
+	header := new(cartridgeHeader)
 
 	header.romEntryPoint = romData[0x000:0x003]
 	header.gameTitle = romData[0x0A0:0x0AB]
@@ -119,7 +119,7 @@ func extractHeaderData(romData []byte) *CartridgeHeader {
 	return header
 }
 
-func logHeaderData(header *CartridgeHeader) {
+func logHeaderData(header *cartridgeHeader) {
 	log.Println("Reading cartridge readers...")
 	log.Println("ROM Entry Point: ", header.romEntryPoint)
 	log.Println("Game Title: ", string(header.gameTitle))
