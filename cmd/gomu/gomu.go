@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"../../pkg/gba"
+)
 
 func main() {
-	fmt.Println("Hello GoMu")
+	gba.InitializeROM("cartridge/game.GBA")
 }
