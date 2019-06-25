@@ -9,7 +9,7 @@ import (
 
 type cartridgeHeader struct {
 	/*
-		Space for a single 32bit ARM opcode that redirects to the actual startaddress of the cartridge,
+		Space for a single 32bit ARM opcode that redirects to the actual start address of the cartridge,
 		this should be usually a "B <start>" instruction.
 	*/
 	romEntryPoint []byte
@@ -102,26 +102,26 @@ func readROMFile(romPath string) []byte {
 func extractHeaderData(romData []byte) *cartridgeHeader {
 	header := new(cartridgeHeader)
 
-	header.romEntryPoint = romData[0x000:0x003]
-	header.gameTitle = romData[0x0A0:0x0AB]
-	header.gameCode = romData[0x0AC:0x0AF]
-	header.makerCode = romData[0x0B0:0x0B1]
+	header.romEntryPoint = romData[0x000:0x004]
+	header.gameTitle = romData[0x0A0:0x0AC]
+	header.gameCode = romData[0x0AC:0x0B0]
+	header.makerCode = romData[0x0B0:0x0B2]
 	header.fixedValue = romData[0x0B2]
 	header.mainUnitCode = romData[0x0B3]
 	header.deviceType = romData[0x0B4]
 	header.softwareVersion = romData[0x0BC]
 	header.complementCheck = romData[0x0BD]
-	header.ramEntryPoint = romData[0x0C0:0x0C3]
+	header.ramEntryPoint = romData[0x0C0:0x0C4]
 	header.bootMode = romData[0x0C4]
 	header.slaveID = romData[0x0C5]
-	header.joybusEntryPoint = romData[0x0E0:0x0E3]
+	header.joybusEntryPoint = romData[0x0E0:0x0E4]
 
 	return header
 }
 
 func logHeaderData(header *cartridgeHeader) {
 	log.Println("Reading cartridge readers...")
-	log.Println("ROM Entry Point: ", header.romEntryPoint)
+	log.Printf("ROM Entry Point: %08b\n", header.romEntryPoint)
 	log.Println("Game Title: ", string(header.gameTitle))
 	log.Println("Game Code: ", string(header.gameCode))
 	log.Println("Maker Code: ", string(header.makerCode))
@@ -130,8 +130,8 @@ func logHeaderData(header *cartridgeHeader) {
 	log.Println("Device type: ", header.deviceType)
 	log.Println("Software version: ", header.softwareVersion)
 	log.Println("Complement Check: ", header.complementCheck)
-	log.Println("RAM Entry Point: ", header.ramEntryPoint)
+	log.Printf("RAM Entry Point: %08b\n", header.ramEntryPoint)
 	log.Println("Boot mode: ", header.bootMode)
 	log.Println("Slave ID Number: ", header.slaveID)
-	log.Println("Joybus Entry Point: ", header.joybusEntryPoint)
+	log.Printf("Joybus Entry Point: %08b\n", header.joybusEntryPoint)
 }
