@@ -65,9 +65,10 @@ type registerSet struct {
 func (registers *registerSet) reset(usingBIOS bool) {
 	registers.r0, registers.r1, registers.r2, registers.r3, registers.r4, registers.r5 = 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
 	registers.r6, registers.r7, registers.r8, registers.r9, registers.r10 = 0x0, 0x0, 0x0, 0x0, 0x0
-	registers.r11, registers.r12, registers.r13, registers.r14 = 0x0, 0x0, 0x0, 0x0
+	registers.r11, registers.r12, registers.r14 = 0x0, 0x0, 0x0
 
-	registers.r8FIQMode, registers.r9FIQMode, registers.r10FIQMode, registers.r11FIQMode, registers.r12FIQMode, registers.r14FIQMode = 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
+	registers.r8FIQMode, registers.r9FIQMode, registers.r10FIQMode, registers.r11FIQMode = 0x0, 0x0, 0x0, 0x0
+	registers.r12FIQMode, registers.r14FIQMode = 0x0, 0x0
 
 	registers.r14SupervisorMode, registers.spsrSupervisorMode = 0x0, 0x0
 	registers.r14AbortMode, registers.spsrAbortMode = 0x0, 0x0
