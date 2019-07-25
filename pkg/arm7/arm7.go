@@ -6,7 +6,7 @@ import (
 	"reflect"
 )
 
-type registerSet struct {
+type RegisterSet struct {
 	// General Purpose Registers
 	r0  uint32
 	r1  uint32
@@ -62,7 +62,7 @@ type registerSet struct {
 	spsrUndefinedMode uint32
 }
 
-func (registers *registerSet) reset(usingBIOS bool) {
+func (registers *RegisterSet) reset(usingBIOS bool) {
 	registers.r0, registers.r1, registers.r2, registers.r3, registers.r4, registers.r5 = 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
 	registers.r6, registers.r7, registers.r8, registers.r9, registers.r10 = 0x0, 0x0, 0x0, 0x0, 0x0
 	registers.r11, registers.r12, registers.r14 = 0x0, 0x0, 0x0
@@ -92,7 +92,7 @@ func (registers *registerSet) reset(usingBIOS bool) {
 
 }
 
-func (registers *registerSet) getRegister(register uint32) uint32 {
+func (registers *RegisterSet) getRegister(register uint32) uint32 {
 	registerName := fmt.Sprintf("r%d", register)
 	registerValue := reflect.Indirect(reflect.ValueOf(registers)).FieldByName(registerName)
 	// This check is used to avoid "cannot return value obtained from unexported field or method" panic
@@ -102,7 +102,7 @@ func (registers *registerSet) getRegister(register uint32) uint32 {
 	return 0x0
 }
 
-func (registers *registerSet) setRegister(register uint32, value uint32) {
+func (registers *RegisterSet) setRegister(register uint32, value uint32) {
 	switch register {
 	case 0:
 		registers.r0 = value
@@ -141,7 +141,7 @@ func (registers *registerSet) setRegister(register uint32, value uint32) {
 	}
 }
 
-func branchWithLink(instruction []byte, registers *registerSet) {
+func BranchWithLink(instruction []byte, registers *RegisterSet) {
 	// First, we correct the byte order of the opcode
 	fixedOInstruction := translateLittleEndianInstruction(instruction)
 
@@ -168,7 +168,7 @@ func branchWithLink(instruction []byte, registers *registerSet) {
 
 }
 
-func branchAndExchange(instruction []byte, registers *registerSet) {
+func BranchAndExchange(instruction []byte, registers *RegisterSet) {
 	fixedInstruction := translateLittleEndianInstruction(instruction)
 
 	sourceRegister := fixedInstruction & 0xF
