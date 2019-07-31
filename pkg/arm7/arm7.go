@@ -6,6 +6,7 @@ import (
 	"reflect"
 )
 
+// Register definitions
 type RegisterSet struct {
 	// General Purpose Registers
 	r0  uint32
@@ -141,6 +142,7 @@ func (registers *RegisterSet) setRegister(register uint32, value uint32) {
 	}
 }
 
+// BranchWithLink
 func BranchWithLink(instruction []byte, registers *RegisterSet) {
 	// First, we correct the byte order of the opcode
 	fixedOInstruction := translateLittleEndianInstruction(instruction)
@@ -168,6 +170,7 @@ func BranchWithLink(instruction []byte, registers *RegisterSet) {
 
 }
 
+// BranchAndExchange
 func BranchAndExchange(instruction []byte, registers *RegisterSet) {
 	fixedInstruction := translateLittleEndianInstruction(instruction)
 
