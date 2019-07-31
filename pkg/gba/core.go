@@ -1,6 +1,6 @@
 package gba
 
-import arm7 "github.com/goiabada/gomu/pkg/arm7"
+import "github.com/goiabada/gomu/pkg/arm7"
 
 // InitializeROM loads the rom file and extract it's headers
 func InitializeROM(romPath string) {
