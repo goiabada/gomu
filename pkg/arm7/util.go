@@ -1,4 +1,4 @@
-package gba
+package arm7
 
 import "encoding/binary"
 
