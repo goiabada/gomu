@@ -2,9 +2,9 @@ package arm7
 
 import "log"
 
-// UndRegisters define the registers for the UND CPU Mode
+// UndRegisters define the Registers for the UND CPU Mode
 type UndRegisters struct {
-	// Banked Undefined Mode registers
+	// Banked Undefined Mode Registers
 	R13  uint32
 	R14  uint32
 	Spsr uint32

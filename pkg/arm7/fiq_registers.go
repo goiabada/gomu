@@ -2,7 +2,7 @@ package arm7
 
 import "log"
 
-// FiqRegisters define the registers for the FIQ CPU Mode
+// FiqRegisters define the Registers for the FIQ CPU Mode
 type FiqRegisters struct {
 	// Banked Registers for Fast Interrupt Request (FIQ) mode
 	R8  uint32

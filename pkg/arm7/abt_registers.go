@@ -2,9 +2,9 @@ package arm7
 
 import "log"
 
-// AbtRegisters define the registers for the ABT CPU Mode
+// AbtRegisters define the Registers for the ABT CPU Mode
 type AbtRegisters struct {
-	// Banked Supervisor Calls (Abt) mode registers
+	// Banked Supervisor Calls (Abt) mode Registers
 	R13  uint32
 	R14  uint32
 	Spsr uint32

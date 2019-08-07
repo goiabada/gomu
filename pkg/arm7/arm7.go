@@ -4,14 +4,14 @@ import (
 	"log"
 )
 
-// CPU defines the processor with all relevant info and registers
+// CPU defines the processor with all relevant info and Registers
 type CPU struct {
-	cpuMode         int8
-	instructionMode int8
-	registers       RegisterSet
+	CPUMode         int8
+	InstructionMode int8
+	Registers       RegisterSet
 }
 
-// RegisterSet envelops all different registers from every CPU Mode
+// RegisterSet envelops all different Registers from every CPU Mode
 type RegisterSet struct {
 	sysRegisters SysRegisters
 	fiqRegisters FiqRegisters
@@ -38,38 +38,39 @@ const (
 	THUMB
 )
 
-func (registers *RegisterSet) reset(usingBIOS bool) {
-	registers.sysRegisters.reset(usingBIOS)
-	registers.fiqRegisters.reset(usingBIOS)
-	registers.svcRegisters.reset(usingBIOS)
-	registers.abtRegisters.reset(usingBIOS)
-	registers.irqRegisters.reset(usingBIOS)
-	registers.undRegisters.reset(usingBIOS)
+// Reset all the registers to the default state
+func (Registers *RegisterSet) Reset(usingBIOS bool) {
+	Registers.sysRegisters.reset(usingBIOS)
+	Registers.fiqRegisters.reset(usingBIOS)
+	Registers.svcRegisters.reset(usingBIOS)
+	Registers.abtRegisters.reset(usingBIOS)
+	Registers.irqRegisters.reset(usingBIOS)
+	Registers.undRegisters.reset(usingBIOS)
 }
 
 func (cpu *CPU) getRegister(register uint32) uint32 {
 	switch register {
 	case 0, 1, 2, 3, 4, 5, 6, 7, 15:
-		return cpu.registers.sysRegisters.getRegister(register)
+		return cpu.Registers.sysRegisters.getRegister(register)
 	case 8, 9, 10, 11, 12:
-		if cpu.cpuMode == FIQ {
-			return cpu.registers.fiqRegisters.getRegister(register)
+		if cpu.CPUMode == FIQ {
+			return cpu.Registers.fiqRegisters.getRegister(register)
 		}
-		return cpu.registers.sysRegisters.getRegister(register)
+		return cpu.Registers.sysRegisters.getRegister(register)
 	case 13, 14:
-		switch cpu.cpuMode {
+		switch cpu.CPUMode {
 		case SYS:
-			return cpu.registers.sysRegisters.getRegister(register)
+			return cpu.Registers.sysRegisters.getRegister(register)
 		case FIQ:
-			return cpu.registers.fiqRegisters.getRegister(register)
+			return cpu.Registers.fiqRegisters.getRegister(register)
 		case SVC:
-			return cpu.registers.svcRegisters.getRegister(register)
+			return cpu.Registers.svcRegisters.getRegister(register)
 		case ABT:
-			return cpu.registers.abtRegisters.getRegister(register)
+			return cpu.Registers.abtRegisters.getRegister(register)
 		case IRQ:
-			return cpu.registers.irqRegisters.getRegister(register)
+			return cpu.Registers.irqRegisters.getRegister(register)
 		case UND:
-			return cpu.registers.undRegisters.getRegister(register)
+			return cpu.Registers.undRegisters.getRegister(register)
 		}
 	default:
 		log.Println("You're are trying to access a non-existent register!")
@@ -80,26 +81,26 @@ func (cpu *CPU) getRegister(register uint32) uint32 {
 func (cpu *CPU) setRegister(register uint32, value uint32) {
 	switch register {
 	case 0, 1, 2, 3, 4, 5, 6, 7, 15:
-		cpu.registers.sysRegisters.setRegister(register, value)
+		cpu.Registers.sysRegisters.setRegister(register, value)
 	case 8, 9, 10, 11, 12:
-		if cpu.cpuMode == FIQ {
-			cpu.registers.fiqRegisters.setRegister(register, value)
+		if cpu.CPUMode == FIQ {
+			cpu.Registers.fiqRegisters.setRegister(register, value)
 		}
-		cpu.registers.sysRegisters.setRegister(register, value)
+		cpu.Registers.sysRegisters.setRegister(register, value)
 	case 13, 14:
-		switch cpu.cpuMode {
+		switch cpu.CPUMode {
 		case SYS:
-			cpu.registers.sysRegisters.setRegister(register, value)
+			cpu.Registers.sysRegisters.setRegister(register, value)
 		case FIQ:
-			cpu.registers.fiqRegisters.setRegister(register, value)
+			cpu.Registers.fiqRegisters.setRegister(register, value)
 		case SVC:
-			cpu.registers.svcRegisters.setRegister(register, value)
+			cpu.Registers.svcRegisters.setRegister(register, value)
 		case ABT:
-			cpu.registers.abtRegisters.setRegister(register, value)
+			cpu.Registers.abtRegisters.setRegister(register, value)
 		case IRQ:
-			cpu.registers.irqRegisters.setRegister(register, value)
+			cpu.Registers.irqRegisters.setRegister(register, value)
 		case UND:
-			cpu.registers.undRegisters.setRegister(register, value)
+			cpu.Registers.undRegisters.setRegister(register, value)
 		}
 	default:
 		log.Println("You're are trying to overwrite a non-existent register!")

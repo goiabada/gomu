@@ -2,9 +2,9 @@ package arm7
 
 import "log"
 
-// IrqRegisters define the registers for the IRQ CPU Mode
+// IrqRegisters define the Registers for the IRQ CPU Mode
 type IrqRegisters struct {
-	// Banked Interrupt Mode (IRQ) registers
+	// Banked Interrupt Mode (IRQ) Registers
 	R13  uint32
 	R14  uint32
 	Spsr uint32

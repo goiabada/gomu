@@ -2,7 +2,7 @@ package arm7
 
 import "log"
 
-// SysRegisters define the registers for the SYS CPU Mode
+// SysRegisters define the Registers for the SYS CPU Mode
 type SysRegisters struct {
 	// General Purpose Registers
 	R0  uint32

@@ -2,9 +2,9 @@ package arm7
 
 import "log"
 
-// SvcRegisters define the registers for the SVC CPU Mode
+// SvcRegisters define the Registers for the SVC CPU Mode
 type SvcRegisters struct {
-	// Banked Supervisor Calls (SVC) mode registers
+	// Banked Supervisor Calls (SVC) mode Registers
 	R13  uint32
 	R14  uint32
 	Spsr uint32
